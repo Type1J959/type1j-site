@@ -15,6 +15,16 @@
         var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
         if (a) {
           var href = a.getAttribute('href') || '';
+          var affPartner = a.getAttribute('data-ga-affiliate');
+          if (affPartner) {
+            gtag('event', 'affiliate_click', {
+              partner: affPartner,
+              placement: a.getAttribute('data-ga-placement') || 'page',
+              source_page: page,
+              link_url: href
+            });
+            return;
+          }
           var plGame = a.getAttribute('data-ga-playlist');
           if (plGame) {
             gtag('event', 'youtube_playlist_click', {
@@ -89,7 +99,10 @@
         'bg3': '/bg3builds/',
         'baldursgate3': '/bg3builds/',
         'home/bg3builds': '/bg3builds/',
-        'home': '/'
+        'home': '/',
+        'privacy': '/privacy/',
+        'privacypolicy': '/privacy/',
+        'privacy-policy': '/privacy/'
       };
       if (routes[p]) {
         window.location.replace('https://www.type1j.com' + routes[p]);

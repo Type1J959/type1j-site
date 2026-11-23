@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <!-- Google tag (gtag.js) — Type 1 J Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-73E704E8KT"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-73E704E8KT');
+    (function () {
+      document.addEventListener('click', function (e) {
+        if (typeof window.gtag !== 'function') return;
+        var page = window.location.pathname || '/';
+        var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+        if (a) {
+          var href = a.getAttribute('href') || '';
+          var affPartner = a.getAttribute('data-ga-affiliate');
+          if (affPartner) {
+            gtag('event', 'affiliate_click', {
+              partner: affPartner,
+              placement: a.getAttribute('data-ga-placement') || 'page',
+              source_page: page,
+              link_url: href
+            });
+            return;
+          }
+          var plGame = a.getAttribute('data-ga-playlist');
+          if (plGame) {
+            gtag('event', 'youtube_playlist_click', {
+              game: plGame,
+              placement: a.getAttribute('data-ga-placement') || 'page',
+              source_page: page,
+              link_url: href
+            });
+          }
+          var low = href.toLowerCase();
+          var plat = low.includes('youtube.com') || low.includes('youtu.be') ? 'youtube'
+            : low.includes('twitch.tv') ? 'twitch'
+            : low.includes('tiktok.com') ? 'tiktok'
+            : low.includes('instagram.com') ? 'instagram'
+            : (low.includes('x.com/') || low.includes('twitter.com/')) ? 'x'
+            : '';
+          if (plat) {
+            gtag('event', 'channel_click', {
+              platform: plat,
+              source_page: page,
+              link_text: (a.textContent || '').trim().slice(0, 60),
+              link_url: href
+            });
+            return;
+          }
+          if (low.indexOf('https://www.type1j.com') === 0) {
+            gtag('event', 'hub_switch', {
+              source_page: page,
+              target_hub: href.replace('https://www.type1j.com', '') || '/'
+            });
+            return;
+          }
+        }
+        var btn = e.target && e.target.closest ? e.target.closest('button') : null;
+        if (!btn) return;
+        var bid = btn.id || '';
+        var act = bid === 'open-flow-blueprint-btn' ? 'open_flow_blueprint'
+          : bid === 'save-factory-btn' ? 'save_satisfactory_factory'
+          : bid === 'an-add-expansion-btn' ? 'add_full_expansion'
+          : bid === 'b-save-build-btn' ? 'save_dbd_loadout'
+          : bid === 'b-copy-build-btn' ? 'copy_dbd_chat_build'
+          : bid === 'copy-md-btn' ? 'copy_bg3_build_summary'
+          : bid === 'pal-save-btn' ? 'save_palworld_progress'
+          : bid === 'dbd-save-btn' ? 'save_dbd_progress'
+          : btn.classList.contains('an-add-step-btn') ? 'add_expansion_step'
+          : btn.classList.contains('nav-sec-btn') ? ('tab_' + (btn.getAttribute('data-section') || 'section'))
+          : '';
+        if (act) {
+          gtag('event', 'tool_action', { action_name: act, source_page: page });
+        }
+      }, true);
+    })();
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy &amp; Affiliate Disclosure | Type 1 J</title>
+  <meta name="description" content="Privacy Policy, Cookie &amp; Advertising Notice (Google Analytics &amp; Google AdSense), and FTC Affiliate Disclosure for Type 1 J (www.type1j.com)." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.type1j.com/privacy" />
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+</head>
+<body class="min-h-screen bg-[#080a0f] text-slate-200 font-sans antialiased">
+  <header class="border-b border-slate-800 bg-[#080a0f]/95 sticky top-0 z-30 backdrop-blur">
+    <div class="mx-auto max-w-4xl px-4 py-3 flex flex-wrap items-center justify-between gap-3 text-xs">
+      <a href="https://www.type1j.com/" class="font-extrabold tracking-wider text-cyan-300 hover:text-amber-300 transition">TYPE 1 J &larr; Back to Home</a>
+      <nav class="flex flex-wrap items-center gap-2 font-semibold text-slate-300">
+        <a href="https://www.type1j.com/bg3builds" class="hover:text-amber-300">⚔️ BG3</a>
+        <a href="https://www.type1j.com/palworld" class="hover:text-emerald-300">🐾 Palworld</a>
+        <a href="https://www.type1j.com/deadbydaylight" class="hover:text-rose-300">🩸 DbD</a>
+        <a href="https://www.type1j.com/satisfactory" class="hover:text-orange-300">🏭 Satisfactory</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-4xl px-4 py-8 space-y-6">
+    <div class="space-y-1">
+      <div class="text-[11px] font-bold uppercase tracking-widest text-cyan-400">LEGAL &amp; TRANSPARENCY</div>
+      <h1 class="text-2xl sm:text-3xl font-black text-white">Privacy Policy &amp; Affiliate Disclosure</h1>
+      <p class="text-xs text-slate-400">Last updated: 2026-11-23 &bull; Applies to <strong>https://www.type1j.com</strong> and all Type 1 J interactive gaming planners.</p>
+    </div>
+
+    <section class="rounded-2xl bg-[#10141f] border border-slate-800 p-5 space-y-2.5 text-sm leading-relaxed text-slate-300">
+      <h2 class="text-base font-bold text-white">1. Information We Collect &amp; Cloud Sync Accounts</h2>
+      <p>You can use every Type 1 J tool (Baldur's Gate 3 Team Build Planner, Palworld 1.0 Hub, Dead by Daylight Hub, and Satisfactory 1.0 Factory Hub) without creating an account. By default, your builds, checklists, and factory layouts are stored only in your own browser's <code class="text-cyan-300">localStorage</code>.</p>
+      <p>If you voluntarily create a free Type 1 J account to sync saved game data across devices, we store only your chosen username, hashed password/PIN, optional device session token (if you opt in to stay signed in), and your saved game planner JSON data. We do not collect payment details, real names, street addresses, or sell personal data.</p>
+    </section>
+
+    <section class="rounded-2xl bg-[#10141f] border border-slate-800 p-5 space-y-2.5 text-sm leading-relaxed text-slate-300">
+      <h2 class="text-base font-bold text-white">2. Google Analytics</h2>
+      <p>We use <strong>Google Analytics 4</strong> to understand aggregate site traffic, which gaming planners are most helpful, and outbound clicks to our official channels and partner links. Google Analytics uses cookies and anonymized usage metrics. You can opt out anytime using the <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer" class="text-cyan-300 hover:underline">Google Analytics Opt-out Browser Add-on</a>.</p>
+    </section>
+
+    <section class="rounded-2xl bg-[#10141f] border border-slate-800 p-5 space-y-2.5 text-sm leading-relaxed text-slate-300">
+      <h2 class="text-base font-bold text-white">3. Google AdSense &amp; Third-Party Advertising</h2>
+      <p>We may display advertisements served by <strong>Google AdSense</strong> and third-party ad vendors to help keep all Type 1 J tools 100% free. Third-party vendors, including Google, use cookies to serve ads based on a user's prior visits to this website or other websites.</p>
+      <p>Google's use of advertising cookies enables it and its partners to serve ads to users based on their visit to this site and/or other sites on the Internet. Users may opt out of personalized advertising by visiting <a href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer" class="text-cyan-300 hover:underline">Google Ads Settings</a> or <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer" class="text-cyan-300 hover:underline">aboutads.info</a>.</p>
+    </section>
+
+    <section class="rounded-2xl bg-[#10141f] border border-slate-800 p-5 space-y-2.5 text-sm leading-relaxed text-slate-300">
+      <h2 class="text-base font-bold text-white">4. Affiliate &amp; Partner Link Disclosure (FTC)</h2>
+      <p>Type 1 J participates in creator partner and affiliate programs — including <strong>ADVANCEDgg</strong> and <strong>DUBBY</strong>. Links marked as partner, sponsor, or affiliate links (including discount code <strong class="text-white font-mono">TYPE1J</strong>) may earn Type 1 J a small commission if you make a purchase, at zero extra cost to you. These commissions directly support free community tools and live streams.</p>
+    </section>
+
+    <section class="rounded-2xl bg-[#10141f] border border-slate-800 p-5 space-y-2.5 text-sm leading-relaxed text-slate-300">
+      <h2 class="text-base font-bold text-white">5. Third-Party Links &amp; Contact</h2>
+      <p>Our tools link to external sites such as YouTube, Twitch, TikTok, Instagram, X, Satisfactory Wiki, Dead by Daylight Wiki, NightLight.gg, and Paldb.cc. We are not responsible for the privacy practices of external sites. To request deletion of a Type 1 J cloud sync username or ask privacy questions, reach out via our official channels on <a href="https://www.youtube.com/@type1j" target="_blank" rel="noopener noreferrer" class="text-red-400 hover:underline">YouTube</a>, <a href="https://www.twitch.tv/Type_1_J" target="_blank" rel="noopener noreferrer" class="text-purple-400 hover:underline">Twitch</a>, or <a href="https://x.com/Type_1_J" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:underline">X (@Type_1_J)</a>.</p>
+    </section>
+  </main>
+
+  <footer class="border-t border-slate-800 bg-[#080a0f] py-5 mt-8">
+    <div class="mx-auto max-w-4xl px-4 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-500">
+      <span>&copy; 2026 Type 1 J &bull; www.type1j.com</span>
+      <a href="https://www.type1j.com/" class="text-cyan-400 hover:underline">Return to Homepage</a>
+    </div>
+  </footer>
+</body>
+</html>
