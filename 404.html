@@ -1,6 +1,73 @@
 <!DOCTYPE html>
 <html lang="en" class="dark">
 <head>
+  <!-- Google tag (gtag.js) — Type 1 J Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-73E704E8KT"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-73E704E8KT');
+    (function () {
+      document.addEventListener('click', function (e) {
+        if (typeof window.gtag !== 'function') return;
+        var page = window.location.pathname || '/';
+        var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+        if (a) {
+          var href = a.getAttribute('href') || '';
+          var plGame = a.getAttribute('data-ga-playlist');
+          if (plGame) {
+            gtag('event', 'youtube_playlist_click', {
+              game: plGame,
+              placement: a.getAttribute('data-ga-placement') || 'page',
+              source_page: page,
+              link_url: href
+            });
+          }
+          var low = href.toLowerCase();
+          var plat = low.includes('youtube.com') || low.includes('youtu.be') ? 'youtube'
+            : low.includes('twitch.tv') ? 'twitch'
+            : low.includes('tiktok.com') ? 'tiktok'
+            : low.includes('instagram.com') ? 'instagram'
+            : (low.includes('x.com/') || low.includes('twitter.com/')) ? 'x'
+            : '';
+          if (plat) {
+            gtag('event', 'channel_click', {
+              platform: plat,
+              source_page: page,
+              link_text: (a.textContent || '').trim().slice(0, 60),
+              link_url: href
+            });
+            return;
+          }
+          if (low.indexOf('https://www.type1j.com') === 0) {
+            gtag('event', 'hub_switch', {
+              source_page: page,
+              target_hub: href.replace('https://www.type1j.com', '') || '/'
+            });
+            return;
+          }
+        }
+        var btn = e.target && e.target.closest ? e.target.closest('button') : null;
+        if (!btn) return;
+        var bid = btn.id || '';
+        var act = bid === 'open-flow-blueprint-btn' ? 'open_flow_blueprint'
+          : bid === 'save-factory-btn' ? 'save_satisfactory_factory'
+          : bid === 'an-add-expansion-btn' ? 'add_full_expansion'
+          : bid === 'b-save-build-btn' ? 'save_dbd_loadout'
+          : bid === 'b-copy-build-btn' ? 'copy_dbd_chat_build'
+          : bid === 'copy-md-btn' ? 'copy_bg3_build_summary'
+          : bid === 'pal-save-btn' ? 'save_palworld_progress'
+          : bid === 'dbd-save-btn' ? 'save_dbd_progress'
+          : btn.classList.contains('an-add-step-btn') ? 'add_expansion_step'
+          : btn.classList.contains('nav-sec-btn') ? ('tab_' + (btn.getAttribute('data-section') || 'section'))
+          : '';
+        if (act) {
+          gtag('event', 'tool_action', { action_name: act, source_page: page });
+        }
+      }, true);
+    })();
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Page Not Found | Type 1 J</title>

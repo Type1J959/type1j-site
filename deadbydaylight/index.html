@@ -1,6 +1,73 @@
 <!DOCTYPE html>
 <html lang="en" class="dark">
 <head>
+  <!-- Google tag (gtag.js) — Type 1 J Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-73E704E8KT"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-73E704E8KT');
+    (function () {
+      document.addEventListener('click', function (e) {
+        if (typeof window.gtag !== 'function') return;
+        var page = window.location.pathname || '/';
+        var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+        if (a) {
+          var href = a.getAttribute('href') || '';
+          var plGame = a.getAttribute('data-ga-playlist');
+          if (plGame) {
+            gtag('event', 'youtube_playlist_click', {
+              game: plGame,
+              placement: a.getAttribute('data-ga-placement') || 'page',
+              source_page: page,
+              link_url: href
+            });
+          }
+          var low = href.toLowerCase();
+          var plat = low.includes('youtube.com') || low.includes('youtu.be') ? 'youtube'
+            : low.includes('twitch.tv') ? 'twitch'
+            : low.includes('tiktok.com') ? 'tiktok'
+            : low.includes('instagram.com') ? 'instagram'
+            : (low.includes('x.com/') || low.includes('twitter.com/')) ? 'x'
+            : '';
+          if (plat) {
+            gtag('event', 'channel_click', {
+              platform: plat,
+              source_page: page,
+              link_text: (a.textContent || '').trim().slice(0, 60),
+              link_url: href
+            });
+            return;
+          }
+          if (low.indexOf('https://www.type1j.com') === 0) {
+            gtag('event', 'hub_switch', {
+              source_page: page,
+              target_hub: href.replace('https://www.type1j.com', '') || '/'
+            });
+            return;
+          }
+        }
+        var btn = e.target && e.target.closest ? e.target.closest('button') : null;
+        if (!btn) return;
+        var bid = btn.id || '';
+        var act = bid === 'open-flow-blueprint-btn' ? 'open_flow_blueprint'
+          : bid === 'save-factory-btn' ? 'save_satisfactory_factory'
+          : bid === 'an-add-expansion-btn' ? 'add_full_expansion'
+          : bid === 'b-save-build-btn' ? 'save_dbd_loadout'
+          : bid === 'b-copy-build-btn' ? 'copy_dbd_chat_build'
+          : bid === 'copy-md-btn' ? 'copy_bg3_build_summary'
+          : bid === 'pal-save-btn' ? 'save_palworld_progress'
+          : bid === 'dbd-save-btn' ? 'save_dbd_progress'
+          : btn.classList.contains('an-add-step-btn') ? 'add_expansion_step'
+          : btn.classList.contains('nav-sec-btn') ? ('tab_' + (btn.getAttribute('data-section') || 'section'))
+          : '';
+        if (act) {
+          gtag('event', 'tool_action', { action_name: act, source_page: page });
+        }
+      }, true);
+    })();
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dead by Daylight Build Planner &amp; 44 Killer Builds | Type 1 J</title>
@@ -174,8 +241,11 @@
           </div>
         </div>
 
-        <!-- Site-Wide Account Controls -->
+        <!-- Site-Wide Account Controls + Stream Archive -->
         <div class="flex flex-wrap items-center gap-2">
+          <a href="https://youtube.com/playlist?list=PLTBsJOLpAvkjpDwViJELhlJganeMo7-ry&amp;si=BSCaZIedCT11_iD0" target="_blank" rel="noopener noreferrer" data-ga-playlist="deadbydaylight" data-ga-placement="header" class="inline-flex items-center gap-1.5 rounded-lg bg-red-600/20 hover:bg-red-600/35 border border-red-500/45 px-2.5 py-1.5 text-[11px] font-bold text-red-200 transition" title="Watch Type 1 J Dead by Daylight Live Stream Archives on YouTube">
+            <span>▶ Stream Archive</span>
+          </a>
           <span id="dbd-sync-pill" class="hidden sm:inline-block rounded-lg bg-slatepanel border border-slate-800 px-2.5 py-1 text-[11px] text-slate-400">Ready</span>
           <button type="button" id="dbd-save-btn" class="hidden items-center gap-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 px-3 py-1.5 text-xs font-bold text-obsidian transition shadow">
             <span>💾 Save Progress</span>
@@ -508,7 +578,7 @@
           <h2 id="dbd-faq-heading" class="font-display text-sm sm:text-base font-bold text-white">Frequently Asked Questions — Dead by Daylight Build Planner</h2>
         </div>
         <div class="flex flex-wrap items-center gap-2 text-[11px] font-bold">
-          <a href="https://www.youtube.com/@type1j" target="_blank" rel="noopener noreferrer" class="rounded-lg bg-red-600/20 hover:bg-red-600/35 border border-red-500/45 px-2.5 py-1 text-red-300 transition">▶ Watch DbD on YouTube</a>
+          <a href="https://youtube.com/playlist?list=PLTBsJOLpAvkjpDwViJELhlJganeMo7-ry&amp;si=BSCaZIedCT11_iD0" target="_blank" rel="noopener noreferrer" data-ga-playlist="deadbydaylight" data-ga-placement="footer_cta" class="rounded-lg bg-red-600/20 hover:bg-red-600/35 border border-red-500/45 px-2.5 py-1 text-red-300 transition">▶ DbD Stream Archive</a>
           <a href="https://www.twitch.tv/Type_1_J" target="_blank" rel="noopener noreferrer" class="rounded-lg bg-purple-600/20 hover:bg-purple-600/35 border border-purple-500/45 px-2.5 py-1 text-purple-300 transition">🟣 Live on Twitch</a>
         </div>
       </div>

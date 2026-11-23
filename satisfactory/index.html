@@ -1,6 +1,73 @@
 <!DOCTYPE html>
 <html lang="en" class="dark">
 <head>
+  <!-- Google tag (gtag.js) — Type 1 J Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-73E704E8KT"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-73E704E8KT');
+    (function () {
+      document.addEventListener('click', function (e) {
+        if (typeof window.gtag !== 'function') return;
+        var page = window.location.pathname || '/';
+        var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+        if (a) {
+          var href = a.getAttribute('href') || '';
+          var plGame = a.getAttribute('data-ga-playlist');
+          if (plGame) {
+            gtag('event', 'youtube_playlist_click', {
+              game: plGame,
+              placement: a.getAttribute('data-ga-placement') || 'page',
+              source_page: page,
+              link_url: href
+            });
+          }
+          var low = href.toLowerCase();
+          var plat = low.includes('youtube.com') || low.includes('youtu.be') ? 'youtube'
+            : low.includes('twitch.tv') ? 'twitch'
+            : low.includes('tiktok.com') ? 'tiktok'
+            : low.includes('instagram.com') ? 'instagram'
+            : (low.includes('x.com/') || low.includes('twitter.com/')) ? 'x'
+            : '';
+          if (plat) {
+            gtag('event', 'channel_click', {
+              platform: plat,
+              source_page: page,
+              link_text: (a.textContent || '').trim().slice(0, 60),
+              link_url: href
+            });
+            return;
+          }
+          if (low.indexOf('https://www.type1j.com') === 0) {
+            gtag('event', 'hub_switch', {
+              source_page: page,
+              target_hub: href.replace('https://www.type1j.com', '') || '/'
+            });
+            return;
+          }
+        }
+        var btn = e.target && e.target.closest ? e.target.closest('button') : null;
+        if (!btn) return;
+        var bid = btn.id || '';
+        var act = bid === 'open-flow-blueprint-btn' ? 'open_flow_blueprint'
+          : bid === 'save-factory-btn' ? 'save_satisfactory_factory'
+          : bid === 'an-add-expansion-btn' ? 'add_full_expansion'
+          : bid === 'b-save-build-btn' ? 'save_dbd_loadout'
+          : bid === 'b-copy-build-btn' ? 'copy_dbd_chat_build'
+          : bid === 'copy-md-btn' ? 'copy_bg3_build_summary'
+          : bid === 'pal-save-btn' ? 'save_palworld_progress'
+          : bid === 'dbd-save-btn' ? 'save_dbd_progress'
+          : btn.classList.contains('an-add-step-btn') ? 'add_expansion_step'
+          : btn.classList.contains('nav-sec-btn') ? ('tab_' + (btn.getAttribute('data-section') || 'section'))
+          : '';
+        if (act) {
+          gtag('event', 'tool_action', { action_name: act, source_page: page });
+        }
+      }, true);
+    })();
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Satisfactory 1.0 Factory Planner &amp; Flow Blueprint | Type 1 J</title>
@@ -167,6 +234,7 @@
           <a href="https://www.type1j.com/palworld" class="rounded-lg bg-slatepanel hover:bg-slatecard border border-slate-800 px-2.5 py-1 text-slate-300 hover:text-cyan-300 transition">🧭 Palworld</a>
           <a href="https://www.type1j.com/deadbydaylight" class="rounded-lg bg-slatepanel hover:bg-slatecard border border-slate-800 px-2.5 py-1 text-slate-300 hover:text-rose-300 transition">🩸 DbD</a>
           <span class="rounded-lg bg-orange-500/20 border border-orange-500/50 px-2.5 py-1 text-orange-200 font-bold">🏭 Satisfactory</span>
+          <a href="https://youtube.com/playlist?list=PLb7-nrRcxk8w&amp;si=iR1d1iNvnpG1Ty-6" target="_blank" rel="noopener noreferrer" data-ga-playlist="satisfactory" data-ga-placement="header" class="rounded-lg bg-red-600/20 hover:bg-red-600/35 border border-red-500/45 px-2.5 py-1 text-red-200 font-bold transition" title="Watch Type 1 J Satisfactory Live Stream Archives on YouTube">▶ Stream Archive</a>
         </nav>
       </div>
       <div id="sat-auth-bar" class="flex items-center gap-2 text-xs">
@@ -697,7 +765,7 @@
           <h2 id="sat-faq-heading" class="font-display text-sm sm:text-base font-bold text-white">Frequently Asked Questions — Satisfactory 1.0 Factory Flow Planner</h2>
         </div>
         <div class="flex flex-wrap items-center gap-2 text-[11px] font-bold">
-          <a href="https://www.youtube.com/@type1j" target="_blank" rel="noopener noreferrer" class="rounded-lg bg-red-600/20 hover:bg-red-600/35 border border-red-500/45 px-2.5 py-1 text-red-300 transition">▶ Watch Satisfactory on YouTube</a>
+          <a href="https://youtube.com/playlist?list=PLb7-nrRcxk8w&amp;si=iR1d1iNvnpG1Ty-6" target="_blank" rel="noopener noreferrer" data-ga-playlist="satisfactory" data-ga-placement="footer_cta" class="rounded-lg bg-red-600/20 hover:bg-red-600/35 border border-red-500/45 px-2.5 py-1 text-red-300 transition">▶ Satisfactory Stream Archive</a>
           <a href="https://www.twitch.tv/Type_1_J" target="_blank" rel="noopener noreferrer" class="rounded-lg bg-purple-600/20 hover:bg-purple-600/35 border border-purple-500/45 px-2.5 py-1 text-purple-300 transition">🟣 Live on Twitch</a>
         </div>
       </div>
